@@ -7,7 +7,7 @@ class Parameter implements ParameterInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var bool|float|int|string
