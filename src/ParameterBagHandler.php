@@ -111,10 +111,12 @@ class ParameterBagHandler implements SubscribingHandlerInterface
         if (empty($type['params'])) {
             return Parameter::class;
         }
-        if (!class_exists($type['params'][0]) || !is_subclass_of($type['params'][0], ParameterInterface::class)) {
+
+        $parameterType = $type['params'][0]['name'] ?? $type['params'][0];
+        if (!class_exists($parameterType) || !is_subclass_of($parameterType, ParameterInterface::class)) {
             throw new RuntimeException('Parameter(s) must implement ' . ParameterInterface::class);
         }
 
-        return $type['params'][0];
+        return $parameterType;
     }
 }
