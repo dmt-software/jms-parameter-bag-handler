@@ -1,3 +1,9 @@
+# ParameterBag Handler
+
+[![Build Status](https://travis-ci.org/dmt-software/jms-parameter-bag-handler.svg?branch=master)](https://travis-ci.org/dmt-software/jms-parameter-bag-handler)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dmt-software/jms-parameter-bag-handler/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dmt-software/jms-parameter-bag-handler/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/dmt-software/jms-parameter-bag-handler/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dmt-software/jms-parameter-bag-handler/?branch=master)
+
 ## Install
 `composer require dmt-software/jms-parameter-bag-handler`
 

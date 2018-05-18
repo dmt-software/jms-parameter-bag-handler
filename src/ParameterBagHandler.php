@@ -13,7 +13,6 @@ use phpDocumentor\Reflection\Types\Object_;
 
 class ParameterBagHandler implements SubscribingHandlerInterface
 {
-    /** @codeCoverageIgnoreStart */
     public static function getSubscribingMethods(): array
     {
         return [
@@ -31,7 +30,6 @@ class ParameterBagHandler implements SubscribingHandlerInterface
             ],
         ];
     }
-    /** @codeCoverageIgnoreEnd */
 
     /**
      * @param JsonSerializationVisitor|VisitorInterface $visitor
@@ -42,7 +40,9 @@ class ParameterBagHandler implements SubscribingHandlerInterface
      * @return array|null
      * @throws RuntimeException
      */
-    public function serializeParameterBag(VisitorInterface $visitor, ? ParameterBag $data, array $type, Context $context):? array
+    public function serializeParameterBag(
+        VisitorInterface $visitor, ? ParameterBag $data, array $type, Context $context
+    ): ? array
     {
         $result = [];
         if ($data === null) {
@@ -70,7 +70,9 @@ class ParameterBagHandler implements SubscribingHandlerInterface
      * @return ParameterBag
      * @throws RuntimeException
      */
-    public function deserializeParameterBag(VisitorInterface $visitor, $data, array $type, Context $context): ParameterBag
+    public function deserializeParameterBag(
+        VisitorInterface $visitor, $data = null, array $type, Context $context
+    ): ParameterBag
     {
         $result = new ParameterBag();
         if (null === $data) {
