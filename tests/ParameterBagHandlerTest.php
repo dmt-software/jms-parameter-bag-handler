@@ -104,7 +104,17 @@ class ParameterBagHandlerTest extends TestCase
         );
 
         static::assertInstanceOf(ParameterBag::class, $result);
-        static::assertCount(count(array_filter((array) $data, function ($val) { return $val !== null; })), $result);
+        static::assertCount(
+            count(
+                array_filter(
+                    (array) $data,
+                    function ($val) {
+                        return $val !== null;
+                    }
+                )
+            ),
+            $result
+        );
         static::assertContainsOnly($type['params'][0] ?? Parameter::class, $result);
     }
 

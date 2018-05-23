@@ -2,6 +2,11 @@
 
 namespace DMT\Serializer;
 
+/**
+ * Class Parameter
+ *
+ * @package DMT\Serializer
+ */
 class Parameter implements ParameterInterface
 {
     /**

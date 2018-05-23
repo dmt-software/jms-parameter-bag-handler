@@ -2,6 +2,11 @@
 
 namespace DMT\Serializer;
 
+/**
+ * Class ParameterBag
+ *
+ * @package DMT\Serializer
+ */
 class ParameterBag extends \ArrayObject
 {
     /**
@@ -41,7 +46,7 @@ class ParameterBag extends \ArrayObject
      * @param string|int $offset
      * @return ParameterInterface|null
      */
-    public function offsetGet($offset):? ParameterInterface
+    public function offsetGet($offset): ?ParameterInterface
     {
         if (gettype($offset) === 'string') {
             $offset = $this->getOffsetFromName($offset);
@@ -94,7 +99,7 @@ class ParameterBag extends \ArrayObject
      * @param string $name
      * @return int|null
      */
-    protected function getOffsetFromName(string $name):? int
+    protected function getOffsetFromName(string $name): ?int
     {
         foreach ($this as $key => $parameter) {
             if ($parameter->getName() === $name) {

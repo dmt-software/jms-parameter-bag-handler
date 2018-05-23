@@ -11,6 +11,11 @@ use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\VisitorInterface;
 use phpDocumentor\Reflection\Types\Object_;
 
+/**
+ * Class ParameterBagHandler
+ *
+ * @package DMT\Serializer
+ */
 class ParameterBagHandler implements SubscribingHandlerInterface
 {
     public static function getSubscribingMethods(): array
@@ -41,9 +46,11 @@ class ParameterBagHandler implements SubscribingHandlerInterface
      * @throws RuntimeException
      */
     public function serializeParameterBag(
-        VisitorInterface $visitor, ? ParameterBag $data, array $type, Context $context
-    ): ? array
-    {
+        VisitorInterface $visitor,
+        ? ParameterBag $data,
+        array $type,
+        Context $context
+    ): ? array {
         $result = [];
         if ($data === null) {
             return $context->shouldSerializeNull() ? $result : null;
@@ -63,7 +70,7 @@ class ParameterBagHandler implements SubscribingHandlerInterface
      * Deserialize elements into a bag of parameters.
      *
      * @param JsonDeserializationVisitor|VisitorInterface $visitor
-     * @param array $data
+     * @param array|null $data
      * @param array $type
      * @param Context $context
      *
@@ -71,9 +78,11 @@ class ParameterBagHandler implements SubscribingHandlerInterface
      * @throws RuntimeException
      */
     public function deserializeParameterBag(
-        VisitorInterface $visitor, $data = null, array $type, Context $context
-    ): ParameterBag
-    {
+        VisitorInterface $visitor,
+        $data,
+        array $type,
+        Context $context
+    ): ParameterBag {
         $result = new ParameterBag();
         if (null === $data) {
             return $result;
