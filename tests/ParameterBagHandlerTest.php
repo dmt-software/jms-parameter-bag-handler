@@ -48,15 +48,6 @@ class ParameterBagHandlerTest extends TestCase
         ['name' => 'ParameterBag', 'params' => ['123']],
     ];
 
-    /**
-     * Make sure the annotations are lazy loaded.
-     */
-    public static function setUpBeforeClass()
-    {
-        AnnotationRegistry::registerLoader('class_exists');
-
-        parent::setUpBeforeClass();
-    }
 
     /**
      * Test deserialization integration.
@@ -71,7 +62,7 @@ class ParameterBagHandlerTest extends TestCase
 
         /** @var DefaultParameters $result */
         $result = $this->getSerializer()->deserialize('{"params":{"key":"val"}}', DefaultParameters::class, 'json');
-        $current = current($result->getParams());
+        $current = current($result->getParams()->getArrayCopy());
 
         static::assertEquals($params, $result);
         static::assertSame('key', $current->getName());
@@ -105,14 +96,7 @@ class ParameterBagHandlerTest extends TestCase
 
         static::assertInstanceOf(ParameterBag::class, $result);
         static::assertCount(
-            count(
-                array_filter(
-                    (array) $data,
-                    function ($val) {
-                        return $val !== null;
-                    }
-                )
-            ),
+            count((array) $data),
             $result
         );
         static::assertContainsOnly($type['params'][0] ?? Parameter::class, $result);
@@ -130,7 +114,7 @@ class ParameterBagHandlerTest extends TestCase
     {
         /** @var VisitorInterface $visitor */
         $visitor = static::getMockForAbstractClass(VisitorInterface::class);
-        $context = DeserializationContext::create()->setSerializeNull(true);
+        $context = DeserializationContext::create();
 
         $handler = new ParameterBagHandler();
         $result = $handler->deserializeParameterBag($visitor, $data, $type, $context);
@@ -145,7 +129,7 @@ class ParameterBagHandlerTest extends TestCase
         );
 
         static::assertInstanceOf(ParameterBag::class, $result);
-        static::assertCount(count($data), $result);
+        static::assertCount($data ? count($data) : 0, $result);
         static::assertContainsOnly($type['params'][0] ?? Parameter::class, $result);
     }
 

@@ -96,9 +96,6 @@ class ParameterBagHandler implements SubscribingHandlerInterface
         $parameter = unserialize(sprintf('O:%d:"%s":0:{}', strlen($parameterType), $parameterType));
 
         foreach ($data as $key => $value) {
-            if (!$context->shouldSerializeNull() && $value === null) {
-                continue;
-            }
             $instance = clone $parameter;
             $instance->setName($key);
             $instance->setValue($value);
